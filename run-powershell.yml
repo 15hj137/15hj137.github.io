@@ -1,0 +1,18 @@
+name: Run PowerShell Script
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'PowerShell script to run'
+        required: true
+        default: 'Write-Output "Hello from GitHub Actions"'
+
+jobs:
+  run-script:
+    runs-on: windows-latest
+    steps:
+      - name: Run PowerShell
+        run: |
+          $script = "${{ github.event.inputs.script }}"
+          Invoke-Expression $script
